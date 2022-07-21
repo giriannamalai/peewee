@@ -6987,6 +6987,7 @@ class ModelRaw(_ModelQueryHelper, RawQuery):
             return self.execute()[0]
         except IndexError:
             sql, params = self.sql()
+            return False
             raise self.model.DoesNotExist('%s instance matching query does '
                                           'not exist:\nSQL: %s\nParams: %s' %
                                           (self.model, sql, params))
@@ -7024,6 +7025,7 @@ class BaseModelSelect(_ModelQueryHelper):
             return clone.execute(database)[0]
         except IndexError:
             sql, params = clone.sql()
+            return False
             raise self.model.DoesNotExist('%s instance matching query does '
                                           'not exist:\nSQL: %s\nParams: %s' %
                                           (clone.model, sql, params))
